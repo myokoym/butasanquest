@@ -1,6 +1,6 @@
 class Game
   def initialize
-    font = Image[:font].slice_tiles(94, 5)
+    font = Image[:font].slice_tiles(94, 8)
     @font_num = font.slice(94 * 2 + 15, 10)
     @font_kana = font.slice(94 * 3, 94)
   end
