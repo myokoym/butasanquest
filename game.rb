@@ -1,5 +1,8 @@
+require_remote "player.rb"
+
 class Game
   def initialize
+    @player = Player.new("ぶたさん", 20)
     font = Image[:font].slice_tiles(94, 8)
     @font_num = font.slice(94 * 2 + 15, 10)
     @font_kana = font.slice(94 * 3, 94)
@@ -105,11 +108,10 @@ class Game
     end
     Window.draw(x, y, @font_frame[4])
 
-
-    draw_kana(40, 0, "ぶたさん")
+    draw_kana(40, 0, @player.name)
     draw_kana(16, 32, "つよさ")
-    draw_num(16 * 5, 32, 30, 3)
+    draw_num(16 * 5, 32, @player.lv, 3)
     draw_kana(16, 64, "げんき")
-    draw_num(16 * 5, 64, 5, 3)
+    draw_num(16 * 5, 64, @player.hp, 3)
   end
 end
