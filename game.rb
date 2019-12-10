@@ -3,6 +3,8 @@ class Game
     font = Image[:font].slice_tiles(94, 8)
     @font_num = font.slice(94 * 2 + 15, 10)
     @font_kana = font.slice(94 * 3, 94)
+    @font_frame = font.slice(94 * 7, 33)
+    @font_triangle = font.slice(94 * 1 + 3, 4)
   end
 
   def draw_num(x, y, num, digit=nil)
@@ -28,5 +30,44 @@ class Game
       end
       Window.draw(x + i * 8 * 2, y, @font_kana[index])
     end
+  end
+
+  def draw_frame
+    x = 0
+    y = Window.height - (16 * 9)
+
+    Window.draw(x, y, @font_frame[2])
+    x += 16
+    (Window.width / 16 - 2).times do
+      Window.draw(x, y, @font_frame[0])
+      x += 16
+    end
+    Window.draw(x, y, @font_frame[3])
+
+    7.times do
+      x = 0
+      y += 16
+      Window.draw(x, y, @font_frame[1])
+      x += 16
+      (Window.width / 16 - 2).times do
+        Window.draw(x, y, @font_frame[-1])
+        x += 16
+      end
+      Window.draw(x, y, @font_frame[1])
+    end
+
+    x = 0
+    y += 16
+    Window.draw(x, y, @font_frame[5])
+    x += 16
+    (Window.width / 16 - 2).times do
+      Window.draw(x, y, @font_frame[0])
+      x += 16
+    end
+    Window.draw(x, y, @font_frame[4])
+  end
+
+  def draw_next_sign
+    Window.draw(Window.width - 32, Window.height - 32, @font_triangle[3])
   end
 end
