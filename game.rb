@@ -32,7 +32,7 @@ class Game
     end
   end
 
-  def draw_frame
+  def draw_talk_window_frame
     x = 0
     y = Window.height - (16 * 9)
 
@@ -69,5 +69,47 @@ class Game
 
   def draw_next_sign
     Window.draw(Window.width - 32, Window.height - 32, @font_triangle[3])
+  end
+
+  def draw_status_window_frame
+    x = 0
+    y = 0
+
+    Window.draw(x, y, @font_frame[2])
+    x += 16
+    (Window.width / 16 / 6).times do
+      Window.draw(x, y, @font_frame[0])
+      x += 16
+    end
+    Window.draw(x, y, @font_frame[3])
+
+    5.times do
+      x = 0
+      y += 16
+      Window.draw(x, y, @font_frame[1])
+      x += 16
+      (Window.width / 16 / 6).times do
+        Window.draw(x, y, @font_frame[-1])
+        x += 16
+      end
+      Window.draw(x, y, @font_frame[1])
+    end
+
+    x = 0
+    y += 16
+    Window.draw(x, y, @font_frame[5])
+    x += 16
+    (Window.width / 16 / 6).times do
+      Window.draw(x, y, @font_frame[0])
+      x += 16
+    end
+    Window.draw(x, y, @font_frame[4])
+
+
+    draw_kana(40, 0, "ぶたさん")
+    draw_kana(16, 32, "つよさ")
+    draw_num(16 * 5, 32, 30, 3)
+    draw_kana(16, 64, "げんき")
+    draw_num(16 * 5, 64, 5, 3)
   end
 end
