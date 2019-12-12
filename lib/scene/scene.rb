@@ -1,0 +1,5 @@
+require_remote "./lib/scene/base.rb"
+require_remote "./lib/scene/title.rb"
+require_remote "./lib/scene/talk.rb"
+require_remote "./lib/scene/battle.rb"
+require_remote "./lib/scene/gameover.rb"
