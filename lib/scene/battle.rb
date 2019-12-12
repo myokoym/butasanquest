@@ -25,9 +25,6 @@ module Scene
     def button_down(id)
       case id
       when Gosu::KB_SPACE
-        if @gameover
-          @game.set_scene(:gameover)
-        end
         if @comments.empty?
           case @command_cursor
           when 0
@@ -49,12 +46,17 @@ module Scene
           end
         else
           @comments.shift
-          if @comments[0]
+          if @gameover && @comments.empty?
+            @game.set_scene(:gameover)
+          end
+          if @comments[0] && !@gameover
             @game.boss.damage(@comments[0][3]) if @comments[0][3]
-            @game.player.damage(@comments[0][4]) if @comments[0][4]
+            if @comments[0][4]
+              @game.player.damage(@comments[0][4])
+              check_gameover
+            end
           end
         end
-        check_gameover
       when Gosu::KB_UP
         @command_cursor -= 1
         @command_cursor = 0 if @command_cursor < 0
