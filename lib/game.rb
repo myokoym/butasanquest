@@ -42,6 +42,9 @@ class Game < Gosu::Window
   end
 
   def button_down(id)
+    if id == Gosu::KB_ESCAPE
+      close # TODO: debug
+    end
     @current_scene.button_down(id)
   end
 
