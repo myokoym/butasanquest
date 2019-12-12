@@ -1,4 +1,4 @@
-# An RPG game on browser by Ruby (DXOpal)
+# An RPG on browser by Ruby (DXOpal)
 
 ## Powered by
 
