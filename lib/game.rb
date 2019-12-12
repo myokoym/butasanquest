@@ -24,6 +24,15 @@ class Game
     elsif Input.key_push?(K_DOWN)
       id = :k_down
     end
+    if Input.mouse_push?(M_LBUTTON)
+      if Input.mouse_y < Window.height / 3
+        id = :k_up
+      elsif Input.mouse_y > Window.height / 3 * 2
+        id = :k_down
+      else
+        id = :k_space
+      end
+    end
     @current_scene.button_down(id)
   end
 
