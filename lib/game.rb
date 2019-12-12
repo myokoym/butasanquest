@@ -29,6 +29,7 @@ class Game < Gosu::Window
     @scenes[:talk] = Scene::Talk.new(self, @current_event)
 
     @scenes[:battle] = Scene::Battle.new(self)
+    @scenes[:gameover] = Scene::Gameover.new(self)
 
     @current_scene = @scenes[:title]
   end

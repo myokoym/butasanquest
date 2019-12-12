@@ -24,6 +24,12 @@ module Scene
 
     private
 
+    def draw_boss
+      window_draw(@game.width / 2 - @game.boss.image.width / 2,
+                  @game.height / 2 - @game.boss.image.height / 2,
+                  @game.boss.image)
+    end
+
     def draw_status_window_frame
       draw_window_frame(x: 0,
                         y: 0,
