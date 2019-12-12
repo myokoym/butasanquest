@@ -17,7 +17,8 @@ class Game
   end
 
   def button_down
-    if Input.key_push?(K_SPACE)
+    if Input.key_push?(K_SPACE) ||
+       Input.key_push?(K_ENTER)
       id = :k_space
     elsif Input.key_push?(K_UP)
       id = :k_up
