@@ -43,6 +43,11 @@ module Scene
               10,
             ]
           when 1
+            @comments << [
+              "#{@game.boss.name} のこうげき",
+              "#{@game.player.name} はよけた",
+              "",
+            ]
           end
         else
           @comments.shift
