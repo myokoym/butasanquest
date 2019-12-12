@@ -1,11 +1,13 @@
-class Player
+class Character
   attr_reader :name
+  attr_reader :image
   attr_reader :lv
   attr_accessor :hp
-  def initialize(name, lv)
+  def initialize(name, lv, image)
     @name = name
     @lv = lv
     @hp = @lv
+    @image = image
   end
 
   def lv_up
