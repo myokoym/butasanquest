@@ -43,10 +43,26 @@ module Scene
               10,
             ]
           when 1
+            damage = 2
+            @game.player.damage(damage)
             @comments << [
               "#{@game.boss.name} のこうげき",
               "#{@game.player.name} はよけた",
               "",
+            ]
+            check_gameover
+          when 2
+            @comments << [
+              "#{@game.player.name} はにげだした",
+              "しかし まわりこまれてしまった",
+              "",
+            ]
+            @comments << [
+              "#{@game.boss.name} のこうげき",
+              "#{@game.player.name} にあたった",
+              "",
+              0,
+              5,
             ]
           end
         else
@@ -67,7 +83,7 @@ module Scene
         @command_cursor = 0 if @command_cursor < 0
       when Gosu::KB_DOWN
         @command_cursor += 1
-        @command_cursor = 1 if @command_cursor > 1
+        @command_cursor = 2 if @command_cursor > 2
       end
     end
 
@@ -94,6 +110,9 @@ module Scene
       draw_kana(CHAR_WIDTH * 3,
                 @game.height - (16 * 9) + CHAR_WIDTH * 4,
                 "よける")
+      draw_kana(CHAR_WIDTH * 3,
+                @game.height - (16 * 9) + CHAR_WIDTH * 6,
+                "にげる")
     end
 
     def draw_command_cursor
