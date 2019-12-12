@@ -44,18 +44,5 @@ module Scene
     def draw_next_sign
       window_draw(@game.width - 32, @game.height - 32, @font_triangle[3])
     end
-
-    def draw_status_window_frame
-      draw_window_frame(x: 0,
-                        y: 0,
-                        inner_width: 7,
-                        inner_height: 5)
-
-      draw_kana(40, 0, @game.player.name)
-      draw_kana(16, 32, "つよさ")
-      draw_num(16 * 5, 32, @game.player.lv, 3)
-      draw_kana(16, 64, "げんき")
-      draw_num(16 * 5, 64, @game.player.hp, 3)
-    end
   end
 end

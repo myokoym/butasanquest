@@ -29,11 +29,11 @@ module Scene
                         inner_width: 7,
                         inner_height: 5)
 
-      @game.draw_kana(40, 0, @game.player.name)
-      @game.draw_kana(16, 32, "つよさ")
-      @game.draw_num(16 * 5, 32, @game.player.lv, 3)
-      @game.draw_kana(16, 64, "げんき")
-      @game.draw_num(16 * 5, 64, @game.player.hp, 3)
+      draw_kana(40, 0, @game.player.name)
+      draw_kana(16, 32, "つよさ")
+      draw_num(16 * 5, 32, @game.player.lv, 3)
+      draw_kana(16, 64, "げんき")
+      draw_num(16 * 5, 64, @game.player.hp, 3)
     end
 
     def draw_window_frame(x:, y:, inner_width:, inner_height:)
