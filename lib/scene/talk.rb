@@ -15,8 +15,9 @@ module Scene
       draw_next_sign
     end
 
-    def button_down
-      if Input.key_push?(K_SPACE)
+    def button_down(id)
+      case id
+      when :k_space
         has_next = @event.next
         unless has_next
           @game.set_scene(:battle)

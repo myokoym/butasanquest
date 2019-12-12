@@ -22,8 +22,9 @@ module Scene
       end
     end
 
-    def button_down
-      if Input.key_push?(K_SPACE)
+    def button_down(id)
+      case id
+      when :k_space
         if @comments.empty?
           case @command_cursor
           when 0
@@ -77,10 +78,10 @@ module Scene
             end
           end
         end
-      elsif Input.key_push?(K_UP)
+      when :k_up
         @command_cursor -= 1
         @command_cursor = 0 if @command_cursor < 0
-      elsif Input.key_push?(K_DOWN)
+      when :k_down
         @command_cursor += 1
         @command_cursor = 2 if @command_cursor > 2
       end

@@ -10,8 +10,9 @@ module Scene
                     "game over")
     end
 
-    def button_down
-      if Input.key_push?(K_SPACE)
+    def button_down(id)
+      case id
+      when :k_space
         @game.set_scene(:title)
       end
     end

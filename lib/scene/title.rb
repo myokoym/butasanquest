@@ -13,8 +13,9 @@ module Scene
                     "press space")
     end
 
-    def button_down
-      if Input.key_push?(K_SPACE)
+    def button_down(id)
+      case id
+      when :k_space
         @game.init_game
         @game.set_scene(:talk)
       end

@@ -17,7 +17,14 @@ class Game
   end
 
   def button_down
-    @current_scene.button_down
+    if Input.key_push?(K_SPACE)
+      id = :k_space
+    elsif Input.key_push?(K_UP)
+      id = :k_up
+    elsif Input.key_push?(K_DOWN)
+      id = :k_down
+    end
+    @current_scene.button_down(id)
   end
 
   def set_scene(new_scene)
