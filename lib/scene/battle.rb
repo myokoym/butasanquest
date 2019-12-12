@@ -47,7 +47,7 @@ module Scene
             @game.player.damage(damage)
             @comments << [
               "#{@game.boss.name} のこうげき",
-              "#{@game.player.name} はよけた",
+              "#{@game.player.name} はひっしによけた",
               "",
             ]
             check_gameover
