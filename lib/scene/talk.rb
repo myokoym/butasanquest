@@ -5,11 +5,20 @@ module Scene
       @event = event
     end
 
+    def update
+    end
+
     def draw
       draw_status_window_frame
       draw_talk_window_frame
       draw_event
       draw_next_sign
+    end
+
+    def button_down(id)
+      if id == Gosu::KB_SPACE
+        @event.next
+      end
     end
 
     private
@@ -22,33 +31,6 @@ module Scene
         draw_kana(CHAR_WIDTH * 2,
                   TALK_WINDOW_Y + CHAR_WIDTH * 2 * (i + 1),
                   @event.current_page.comments[i])
-      end
-    end
-
-    def draw_num(x, y, num, digit=0)
-      text = num.to_s
-      padding_size = 0
-      if text.size < digit
-        padding_size = digit - text.size
-        padding_size.times do |i|
-          window_draw(x + i * 8 * 2, y, @font_kana[-1])
-        end
-      end
-      text.each_char.with_index do |char, i|
-        window_draw(x + (i + padding_size) * 8 * 2,
-                    y,
-                    @font_num[char.to_i])
-      end
-    end
-
-    def draw_kana(x, y, text)
-      text.each_char.with_index do |char, i|
-        if /[ 　]/ =~ char
-          index = -1
-        else
-          index = char.ord - KANA_CODEPOINT_BASE
-        end
-        window_draw(x + i * CHAR_WIDTH, y, @font_kana[index])
       end
     end
 

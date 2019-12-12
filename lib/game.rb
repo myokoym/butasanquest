@@ -17,35 +17,32 @@ class Game < Gosu::Window
     @player = Character.new("ぶたさん", 20, IMAGES[:butasan])
     @boss = Character.new("あかずきん", 10, IMAGES[:akazukin])
 
+    @scenes = {}
+    @scenes[:title] = Scene::Title.new(self)
+
     event_pages = [
       EventPage.new(@boss, ["こんにちは　わたし　あかずきん", "", ""]),
       EventPage.new(@boss, ["こんやの　おかずは　あなたよ", "", ""]),
     ]
     @current_event = Event.new(event_pages)
-    @scene_talk = Scene::Talk.new(self, @current_event)
+    @scenes[:talk] = Scene::Talk.new(self, @current_event)
+
+    @current_scene = @scenes[:title]
   end
 
   def update
+    @current_scene.update
   end
 
   def draw
-    @scene_talk.draw
+    @current_scene.draw
   end
 
   def button_down(id)
-    if id == Gosu::KB_SPACE
-      @current_event.next
-    end
+    @current_scene.button_down(id)
   end
 
-  private
-
-  def input_key?(key)
-    case key
-    when KB_SPACE
-      if Gosu.button_down? Gosu::KB_SPACE
-        true
-      end
-    end
+  def set_scene(new_scene)
+    @current_scene = @scenes[new_scene]
   end
 end

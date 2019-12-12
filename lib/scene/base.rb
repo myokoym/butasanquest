@@ -1,6 +1,7 @@
 module Scene
   class Base
     KANA_CODEPOINT_BASE = "ぁ".ord
+    ALPHABET_CODEPOINT_BASE = "A".ord
     CHAR_WIDTH = 16
     TALK_WINDOW_Y = 480 - CHAR_WIDTH * 9
 
@@ -8,10 +9,19 @@ module Scene
       @game = game
       font = Game::IMAGES[:font]
       @font_num = font.slice(94 * 2 + 15, 10)
+      @font_alphabet = font.slice(94 * 2 + 32, 27)
       @font_kana = font.slice(94 * 3, 94)
       @font_frame = font.slice(94 * 7, 33)
       @font_triangle = font.slice(94 * 1 + 3, 4)
     end
+
+    def update
+    end
+
+    def draw
+    end
+
+    private
 
     def draw_status_window_frame
       draw_window_frame(x: 0,
@@ -83,13 +93,26 @@ module Scene
       if text.size < digit
         padding_size = digit - text.size
         padding_size.times do |i|
-          @game.window_draw(x + i * 8 * 2, y, @font_kana[-1])
+          window_draw(x + i * 8 * 2, y, @font_kana[-1])
         end
       end
       text.each_char.with_index do |char, i|
-        @game.window_draw(x + (i + padding_size) * 8 * 2,
-                          y,
-                          @font_num[char.to_i])
+        window_draw(x + (i + padding_size) * 8 * 2,
+                    y,
+                    @font_num[char.to_i])
+      end
+    end
+
+    def draw_alphabet(x, y, text)
+      text.each_char.with_index do |char, i|
+        if char == " "
+          index = -1
+        else
+          index = char.upcase.ord - ALPHABET_CODEPOINT_BASE
+        end
+        window_draw(x + i * CHAR_WIDTH,
+                    y,
+                    @font_alphabet[index])
       end
     end
 
@@ -100,7 +123,7 @@ module Scene
         else
           index = char.ord - KANA_CODEPOINT_BASE
         end
-        @game.window_draw(x + i * CHAR_WIDTH, y, @font_kana[index])
+        window_draw(x + i * CHAR_WIDTH, y, @font_kana[index])
       end
     end
 
