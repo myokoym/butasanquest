@@ -9,6 +9,7 @@ module Scene
       @game = game
       font = Image[:font].slice_tiles(94, 8)
       @font_cursor = font.slice(32 + 18, 1)
+      @font_star = font.slice(94 - 5, 1)
       @font_num = font.slice(94 * 2 + 15, 10)
       @font_alphabet = font.slice(94 * 2 + 32, 27)
       @font_kana = font.slice(94 * 3, 94)
@@ -83,6 +84,19 @@ module Scene
       window_draw(x + CHAR_WIDTH * (inner_width + 1),
                   y + CHAR_WIDTH * (inner_height + 1),
                   @font_frame[4])
+    end
+
+    def draw_next_sign
+      window_draw(Window.width - 32, Window.height - 32, @font_triangle[3])
+    end
+
+    def draw_good_night
+      draw_alphabet(Window.width / 3 * 2,
+                    Window.height - CHAR_WIDTH * 4,
+                    "good night")
+      window_draw(Window.width / 3 * 2 + CHAR_WIDTH * 10,
+                  Window.height - CHAR_WIDTH * 4,
+                  @font_star[0])
     end
 
     def draw_horizontal_line(x, y, size, char)

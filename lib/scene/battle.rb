@@ -68,7 +68,11 @@ module Scene
         else
           @comments.shift
           if @gameover && @comments.empty?
-            @game.set_scene(:gameover)
+            if @game.player.hp > 0
+              @game.set_scene(:gameclear)
+            else
+              @game.set_scene(:gameover)
+            end
           end
           if @comments[0] && !@gameover
             @game.boss.damage(@comments[0][3]) if @comments[0][3]
@@ -91,6 +95,18 @@ module Scene
       if @game.player.hp == 0
         @comments << [
           "#{@game.player.name} はまけてしまった",
+          "",
+          "",
+        ]
+        @gameover = true
+      elsif @game.player.hp == 1
+        @comments << [
+          "はぁ つかれちゃった",
+          "",
+          "",
+        ]
+        @comments << [
+          "かえろ",
           "",
           "",
         ]
@@ -127,6 +143,7 @@ module Scene
                   TALK_WINDOW_Y + CHAR_WIDTH * 2 * (i + 1),
                   @comments[0][i])
       end
+      draw_next_sign
     end
   end
 end

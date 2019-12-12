@@ -65,6 +65,7 @@ class Game
 
     @scenes[:battle] = Scene::Battle.new(self)
     @scenes[:gameover] = Scene::Gameover.new(self)
+    @scenes[:gameclear] = Scene::Gameclear.new(self)
 
     @current_scene = @scenes[:title]
   end

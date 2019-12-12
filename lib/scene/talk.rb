@@ -35,9 +35,5 @@ module Scene
                   @event.current_page.comments[i])
       end
     end
-
-    def draw_next_sign
-      window_draw(Window.width - 32, Window.height - 32, @font_triangle[3])
-    end
   end
 end
