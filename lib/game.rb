@@ -23,9 +23,12 @@ class Game < Gosu::Window
     event_pages = [
       EventPage.new(@boss, ["こんにちは　わたし　あかずきん", "", ""]),
       EventPage.new(@boss, ["こんやの　おかずは　あなたよ", "", ""]),
+      EventPage.new(@boss, ["#{@boss.name} があらわれた", "", ""]),
     ]
     @current_event = Event.new(event_pages)
     @scenes[:talk] = Scene::Talk.new(self, @current_event)
+
+    @scenes[:battle] = Scene::Battle.new(self)
 
     @current_scene = @scenes[:title]
   end

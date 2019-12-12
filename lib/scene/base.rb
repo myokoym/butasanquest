@@ -8,6 +8,7 @@ module Scene
     def initialize(game)
       @game = game
       font = Game::IMAGES[:font]
+      @font_cursor = font.slice(32 + 18, 1)
       @font_num = font.slice(94 * 2 + 15, 10)
       @font_alphabet = font.slice(94 * 2 + 32, 27)
       @font_kana = font.slice(94 * 3, 94)
@@ -34,6 +35,13 @@ module Scene
       draw_num(16 * 5, 32, @game.player.lv, 3)
       draw_kana(16, 64, "げんき")
       draw_num(16 * 5, 64, @game.player.hp, 3)
+    end
+
+    def draw_talk_window_frame
+      draw_window_frame(x: 0,
+                        y: @game.height - (16 * 9),
+                        inner_width: @game.width / 16 - 2,
+                        inner_height: 7)
     end
 
     def draw_window_frame(x:, y:, inner_width:, inner_height:)

@@ -17,7 +17,10 @@ module Scene
 
     def button_down(id)
       if id == Gosu::KB_SPACE
-        @event.next
+        has_next = @event.next
+        unless has_next
+          @game.set_scene(:battle)
+        end
       end
     end
 
@@ -32,13 +35,6 @@ module Scene
                   TALK_WINDOW_Y + CHAR_WIDTH * 2 * (i + 1),
                   @event.current_page.comments[i])
       end
-    end
-
-    def draw_talk_window_frame
-      draw_window_frame(x: 0,
-                        y: @game.height - (16 * 9),
-                        inner_width: @game.width / 16 - 2,
-                        inner_height: 7)
     end
 
     def draw_next_sign

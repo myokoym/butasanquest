@@ -2,7 +2,7 @@ class Character
   attr_reader :name
   attr_reader :image
   attr_reader :lv
-  attr_accessor :hp
+  attr_reader :hp
   def initialize(name, lv, image)
     @name = name
     @lv = lv
@@ -17,5 +17,10 @@ class Character
 
   def hp_max
     @hp = @lv
+  end
+
+  def damage(pow)
+    @hp -= pow
+    @hp = 0 if @hp < 0
   end
 end
