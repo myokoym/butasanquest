@@ -14,10 +14,8 @@ class Game < Gosu::Window
   def initialize
     super(640, 480)
     self.caption = "Butasan Quest"
-    @player = Character.new("ぶたさん", 20, IMAGES[:butasan])
-    @boss = Character.new("あかずきん", 10, IMAGES[:akazukin])
 
-    init_scenes
+    init_game
   end
 
   def update
@@ -37,6 +35,16 @@ class Game < Gosu::Window
 
   def set_scene(new_scene)
     @current_scene = @scenes[new_scene]
+  end
+
+  def init_game
+    init_status
+    init_scenes
+  end
+
+  def init_status
+    @player = Character.new("ぶたさん", 20, IMAGES[:butasan])
+    @boss = Character.new("あかずきん", 10, IMAGES[:akazukin])
   end
 
   def init_scenes

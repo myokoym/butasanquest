@@ -15,7 +15,7 @@ module Scene
 
     def button_down(id)
       if id == Gosu::KB_SPACE
-        @game.init_scenes
+        @game.init_game
         @game.set_scene(:talk)
       end
     end
