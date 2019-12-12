@@ -2,6 +2,8 @@
 
 require "gosu"
 
-require_relative "./game"
+require "./lib/game"
+require "./lib/player"
+require "./lib/boss"
 
 Game.new.show

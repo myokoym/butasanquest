@@ -1,10 +1,3 @@
-require "./player"
-require "./boss"
-
-module ZOrder
-  BACKGROUND, FRAME, PLAYER, UI = *0..3
-end
-
 class Game < Gosu::Window
   KANA_CODEPOINT_BASE = "ぁ".ord
   IMAGES = {
