@@ -15,7 +15,17 @@ class GameWindow < Gosu::Window
   end
 
   def button_down(id)
-    game_button_down(gosu_id_to_symbol(id))
+    symbol = gosu_id_to_symbol(id)
+    if symbol == :m_lbutton
+      if window_mouse_y < window_height / 3
+        symbol = :k_up
+      elsif window_mouse_y > window_height / 3 * 2
+        symbol = :k_down
+      else
+        symbol = :k_space
+      end
+    end
+    game_button_down(symbol)
   end
 
   def gosu_id_to_symbol(id)
@@ -49,11 +59,11 @@ class GameWindow < Gosu::Window
     self.height
   end
 
-  def mouse_x
+  def window_mouse_x
     self.mouse_x
   end
 
-  def mouse_y
+  def window_mouse_y
     self.mouse_y
   end
 end
