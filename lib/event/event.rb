@@ -1,5 +1,3 @@
-require_remote "./lib/event/event_page.rb"
-
 class Event
   attr_reader :event_pages
   attr_reader :current_page_index

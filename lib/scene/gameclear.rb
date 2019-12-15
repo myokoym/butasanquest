@@ -5,8 +5,8 @@ module Scene
     end
 
     def draw
-      draw_alphabet(Window.width / 3 + CHAR_WIDTH * 2,
-                    Window.height / 2 - CHAR_WIDTH,
+      draw_alphabet(@game.window_width / 3 + CHAR_WIDTH * 2,
+                    @game.window_height / 2 - CHAR_WIDTH,
                     "game clear")
       draw_good_night
     end

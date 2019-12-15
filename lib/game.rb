@@ -1,10 +1,8 @@
-require_remote "./lib/character/character.rb"
-require_remote "./lib/scene/scene.rb"
-require_remote "./lib/event/event.rb"
-
-class Game
+class Game < GameWindow
   attr_reader :player, :boss
-  def initialize
+  def initialize(images)
+    super
+    @images = images
     init_game
   end
 
@@ -16,24 +14,7 @@ class Game
     @current_scene.draw
   end
 
-  def button_down
-    if Input.key_push?(K_SPACE) ||
-       Input.key_push?(K_ENTER)
-      id = :k_space
-    elsif Input.key_push?(K_UP)
-      id = :k_up
-    elsif Input.key_push?(K_DOWN)
-      id = :k_down
-    end
-    if Input.mouse_push?(M_LBUTTON)
-      if Input.mouse_y < Window.height / 3
-        id = :k_up
-      elsif Input.mouse_y > Window.height / 3 * 2
-        id = :k_down
-      else
-        id = :k_space
-      end
-    end
+  def game_button_down(id)
     @current_scene.button_down(id)
   end
 
@@ -47,8 +28,8 @@ class Game
   end
 
   def init_status
-    @player = Character.new("ぶたさん", 20, Image[:butasan])
-    @boss = Character.new("あかずきん", 10, Image[:akazukin])
+    @player = Character.new("ぶたさん", 20, @images[:butasan])
+    @boss = Character.new("あかずきん", 10, @images[:akazukin])
   end
 
   def init_scenes
@@ -68,5 +49,13 @@ class Game
     @scenes[:gameclear] = Scene::Gameclear.new(self)
 
     @current_scene = @scenes[:title]
+  end
+
+  def register_image(symbol, image)
+    @images[symbol] = image
+  end
+
+  def image(symbol)
+    @images[symbol]
   end
 end

@@ -7,7 +7,7 @@ module Scene
 
     def initialize(game)
       @game = game
-      font = Image[:font].slice_tiles(94, 8)
+      font = @game.image(:font)
       @font_cursor = font.slice(32 + 18, 1)
       @font_star = font.slice(94 - 5, 1)
       @font_num = font.slice(94 * 2 + 15, 10)
@@ -26,8 +26,8 @@ module Scene
     private
 
     def draw_boss
-      window_draw(Window.width / 2 - @game.boss.image.width / 2,
-                  Window.height / 2 - @game.boss.image.height / 2,
+      window_draw(@game.window_width / 2 - @game.boss.image.width / 2,
+                  @game.window_height / 2 - @game.boss.image.height / 2,
                   @game.boss.image)
     end
 
@@ -46,8 +46,8 @@ module Scene
 
     def draw_talk_window_frame
       draw_window_frame(x: 0,
-                        y: Window.height - (16 * 9),
-                        inner_width: Window.width / 16 - 2,
+                        y: @game.window_height - (16 * 9),
+                        inner_width: @game.window_width / 16 - 2,
                         inner_height: 7)
     end
 
@@ -87,15 +87,15 @@ module Scene
     end
 
     def draw_next_sign
-      window_draw(Window.width - 32, Window.height - 32, @font_triangle[3])
+      window_draw(@game.window_width - 32, @game.window_height - 32, @font_triangle[3])
     end
 
     def draw_good_night
-      draw_alphabet(Window.width / 3 * 2,
-                    Window.height - CHAR_WIDTH * 4,
+      draw_alphabet(@game.window_width / 3 * 2,
+                    @game.window_height - CHAR_WIDTH * 4,
                     "good night")
-      window_draw(Window.width / 3 * 2 + CHAR_WIDTH * 10,
-                  Window.height - CHAR_WIDTH * 4,
+      window_draw(@game.window_width / 3 * 2 + CHAR_WIDTH * 10,
+                  @game.window_height - CHAR_WIDTH * 4,
                   @font_star[0])
     end
 
@@ -156,7 +156,7 @@ module Scene
     end
 
     def window_draw(x, y, image)
-      Window.draw(x, y, image)
+      GameWindow.draw(x, y, image)
     end
   end
 end

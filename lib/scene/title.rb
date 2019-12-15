@@ -5,11 +5,11 @@ module Scene
     end
 
     def draw
-      draw_alphabet(Window.width / 3,
-                    Window.height / 3,
+      draw_alphabet(@game.window_width / 3,
+                    @game.window_height / 3,
                     "Butasan Quest")
-      draw_alphabet(Window.width / 3 + CHAR_WIDTH,
-                    Window.height / 3 * 2,
+      draw_alphabet(@game.window_width / 3 + CHAR_WIDTH,
+                    @game.window_height / 3 * 2,
                     "press space")
     end
 

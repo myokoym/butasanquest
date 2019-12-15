@@ -116,24 +116,24 @@ module Scene
 
     def draw_command_window_frame
       draw_window_frame(x: 0,
-                        y: Window.height - (16 * 9),
+                        y: @game.window_height - (16 * 9),
                         inner_width: 9,
                         inner_height: 7)
 
       draw_kana(CHAR_WIDTH * 3,
-                Window.height - (16 * 9) + CHAR_WIDTH * 2,
+                @game.window_height - (16 * 9) + CHAR_WIDTH * 2,
                 "たたかう")
       draw_kana(CHAR_WIDTH * 3,
-                Window.height - (16 * 9) + CHAR_WIDTH * 4,
+                @game.window_height - (16 * 9) + CHAR_WIDTH * 4,
                 "よける")
       draw_kana(CHAR_WIDTH * 3,
-                Window.height - (16 * 9) + CHAR_WIDTH * 6,
+                @game.window_height - (16 * 9) + CHAR_WIDTH * 6,
                 "にげる")
     end
 
     def draw_command_cursor
       window_draw(CHAR_WIDTH * 2,
-                  Window.height - (16 * 9) + CHAR_WIDTH * (@command_cursor + 1) * 2,
+                  @game.window_height - (16 * 9) + CHAR_WIDTH * (@command_cursor + 1) * 2,
                   @font_cursor[0])
     end
 
