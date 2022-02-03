@@ -11,10 +11,7 @@ class Event
   end
 
   def next
-    @current_page_index += 1
-    if @current_page_index < @event_pages.size
-      return true
-    end
+    return true if (@current_page_index += 1) < @event_pages.size
     false
   end
 end
