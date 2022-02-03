@@ -1,11 +1,11 @@
-require "dxopal"
+# frozen_string_literal: true
+
+require 'dxopal'
 include DXOpal
 
 class GameWindow
-  class << self
-    def draw(x, y, image)
-      Window.draw(x, y, image)
-    end
+  def self.draw(x, y, image)
+    Window.draw x, y, image
   end
 
   def initialize
@@ -21,21 +21,21 @@ class GameWindow
   end
 end
 
-require_remote "./lib/files.rb"
+require_relative './lib/files'
 Files::LIST.each do |path|
-  require_remote "./lib/#{path}.rb"
+  require_relative "./lib/#{path}"
 end
 
-Image.register(:akazukin, "images/akazukin.png")
-Image.register(:butasan, "images/butasan.png")
-Image.register(:font, "font/misaki_gothic_invert_x2.png")
+Image.register(:akazukin, 'images/akazukin.png')
+Image.register(:butasan, 'images/butasan.png')
+Image.register(:font, 'font/misaki_gothic_invert_x2.png')
 
 class Game
   def window_button_down
-    keys = %w(k_space k_enter k_escape k_up k_down k_left k_right).freeze
+    keys = %i(k_space k_enter k_escape k_up k_down k_left k_right).freeze
     
     keys.select do |key|
-      id = key if key_push?(key.to_sym)
+      id = key if key_push? key
     end
 
     if mouse_push?(:m_lbutton)
@@ -53,20 +53,20 @@ class Game
 
   # TODO: not implemented yet in window_button_down()
   #def key_down?(key)
-  #  Input.key_down?(symbol_to_constant(key))
+  #  Input.key_down? symbol_to_constant(key)
   #end
 
   def key_push?(key)
-    Input.key_push?(symbol_to_constant(key))
+    Input.key_push? symbol_to_constant(key)
   end
 
   # TODO: not implemented yet in window_button_down()
   #def mouse_down?(key)
-  #  Input.mouse_down?(symbol_to_constant(key))
+  #  Input.mouse_down? symbol_to_constant(key)
   #end
 
   def mouse_push?(key)
-    Input.mouse_push?(symbol_to_constant(key))
+    Input.mouse_push? symbol_to_constant(key)
   end
 
   def symbol_to_constant(symbol)
