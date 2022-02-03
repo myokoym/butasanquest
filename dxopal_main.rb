@@ -32,29 +32,21 @@ Image.register(:font, "font/misaki_gothic_invert_x2.png")
 
 class Game
   def window_button_down
-    if key_push?(:k_space)
-      id = :k_space
-    elsif key_push?(:k_enter)
-      id = :k_enter
-    elsif key_push?(:k_escape)
-      id = :k_escape
-    elsif key_push?(:k_up)
-      id = :k_up
-    elsif key_push?(:k_down)
-      id = :k_down
-    elsif key_push?(:k_left)
-      id = :k_left
-    elsif key_push?(:k_right)
-      id = :k_right
+    keys = %w(k_space k_enter k_escape k_up k_down k_left k_right).freeze
+    
+    keys.select do |key|
+      id = key if key_push?(key.to_sym)
     end
+
     if mouse_push?(:m_lbutton)
-      if mouse_y < @game.window_height / 3
-        id = :k_up
-      elsif mouse_y > @game.window_height / 3 * 2
-        id = :k_down
-      else
-        id = :k_space
-      end
+      id = case
+           when mouse_y < @game.window_height / 3
+             :k_up
+           when mouse_y > @game.window_height / 3 * 2
+             :k_down
+           else
+             :k_space
+           end
     end
     game_button_down(id)
   end
