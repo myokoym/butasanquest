@@ -1,6 +1,6 @@
 class Event
-  attr_reader :event_pages
-  attr_reader :current_page_index
+  attr_reader :event_pages, :current_page_index
+  
   def initialize(event_pages)
     @event_pages = event_pages
     @current_page_index = 0
