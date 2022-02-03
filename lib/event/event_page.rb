@@ -1,6 +1,6 @@
 class EventPage
-  attr_reader :character
-  attr_reader :comments
+  attr_reader :character, :comments
+  
   def initialize(character, comments)
     @character = character
     @comments = comments
