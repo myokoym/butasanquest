@@ -1,11 +1,11 @@
-require "dxopal"
+# frozen_string_literal: true
+
+require 'dxopal'
 include DXOpal
 
 class GameWindow
-  class << self
-    def draw(x, y, image)
-      Window.draw(x, y, image)
-    end
+  def self.draw(x, y, image)
+    Window.draw x, y, image
   end
 
   def initialize
@@ -21,60 +21,52 @@ class GameWindow
   end
 end
 
-require_remote "./lib/files.rb"
+require_relative './lib/files'
 Files::LIST.each do |path|
-  require_remote "./lib/#{path}.rb"
+  require_relative "./lib/#{path}"
 end
 
-Image.register(:akazukin, "images/akazukin.png")
-Image.register(:butasan, "images/butasan.png")
-Image.register(:font, "font/misaki_gothic_invert_x2.png")
+Image.register(:akazukin, 'images/akazukin.png')
+Image.register(:butasan, 'images/butasan.png')
+Image.register(:font, 'font/misaki_gothic_invert_x2.png')
 
 class Game
   def window_button_down
-    if key_push?(:k_space)
-      id = :k_space
-    elsif key_push?(:k_enter)
-      id = :k_enter
-    elsif key_push?(:k_escape)
-      id = :k_escape
-    elsif key_push?(:k_up)
-      id = :k_up
-    elsif key_push?(:k_down)
-      id = :k_down
-    elsif key_push?(:k_left)
-      id = :k_left
-    elsif key_push?(:k_right)
-      id = :k_right
+    keys = %i(k_space k_enter k_escape k_up k_down k_left k_right).freeze
+    
+    keys.select do |key|
+      id = key if key_push? key
     end
+
     if mouse_push?(:m_lbutton)
-      if mouse_y < @game.window_height / 3
-        id = :k_up
-      elsif mouse_y > @game.window_height / 3 * 2
-        id = :k_down
-      else
-        id = :k_space
-      end
+      id = case
+           when mouse_y < @game.window_height / 3
+             :k_up
+           when mouse_y > @game.window_height / 3 * 2
+             :k_down
+           else
+             :k_space
+           end
     end
     game_button_down(id)
   end
 
   # TODO: not implemented yet in window_button_down()
   #def key_down?(key)
-  #  Input.key_down?(symbol_to_constant(key))
+  #  Input.key_down? symbol_to_constant(key)
   #end
 
   def key_push?(key)
-    Input.key_push?(symbol_to_constant(key))
+    Input.key_push? symbol_to_constant(key)
   end
 
   # TODO: not implemented yet in window_button_down()
   #def mouse_down?(key)
-  #  Input.mouse_down?(symbol_to_constant(key))
+  #  Input.mouse_down? symbol_to_constant(key)
   #end
 
   def mouse_push?(key)
-    Input.mouse_push?(symbol_to_constant(key))
+    Input.mouse_push? symbol_to_constant(key)
   end
 
   def symbol_to_constant(symbol)

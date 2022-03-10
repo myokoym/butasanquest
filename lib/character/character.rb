@@ -1,13 +1,10 @@
 class Character
-  attr_reader :name
-  attr_reader :image
-  attr_reader :lv
-  attr_reader :hp
+  attr_reader :name, :image, :lv, :hp
+  
   def initialize(name, lv, image)
     @name = name
-    @lv = lv
-    @hp = @lv
     @image = image
+    @hp = @lv = lv
   end
 
   def lv_up
@@ -21,6 +18,6 @@ class Character
 
   def damage(pow)
     @hp -= pow
-    @hp = 0 if @hp < 0
+    @hp = 0 if @hp.negative?
   end
 end
